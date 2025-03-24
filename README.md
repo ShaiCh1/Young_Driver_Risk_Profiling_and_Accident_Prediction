@@ -1,57 +1,66 @@
-# Young Driver Risk Profiling and Accident Prediction
+# Predicting Road Accidents Among Young Drivers
 
-This project presents a full machine learning workflow for analyzing young drivers’ risk profiles and predicting their likelihood of being involved in a traffic accident. The data combines demographic information, driving history, accident records, and traffic violations to generate actionable insights and train predictive models.
+## Overview
+This project focuses on predicting whether a young driver is likely to be involved in a road accident, using demographic data, licensing history, prior violations, and parental driving records. The goal is to develop a complete machine learning pipeline that includes clustering, data preprocessing, feature engineering, modeling, and evaluation.
 
-## Project Structure
+---
 
-The project is divided into two main parts:
+## Goals
+- Create behavioral profiles of young drivers using unsupervised learning techniques.
+- Train a classifier to predict accident involvement.
+- Handle real-world, multi-source data with varying quality and structure.
+- Deal with class imbalance, feature leakage, and categorical encoding effectively.
 
-### 1. Driver Profiling with Clustering
+---
 
-- Goal: Identify distinct groups of young drivers based on their background and behavior.
-- Methods: Clustering techniques (e.g., KMeans) were applied after extensive feature engineering to group drivers into meaningful profiles.
-- Analysis: Each group was characterized by features such as driving experience, license restrictions, parental accident history, and demographic attributes.
+## Dataset Description
 
-### 2. Accident Risk Prediction
+Three data sources were integrated:
 
-- Goal: Train a model to predict whether a young driver is likely to be involved in an accident.
-- Model: Random Forest Classifier.
-- Class Imbalance: Handled using SMOTE oversampling.
-- Evaluation: Model performance evaluated on validation and test sets using accuracy, precision, recall, F1-score, and confusion matrix.
+- **Drivers Information (K1)**: Demographics, licensing dates, restrictions, and place of residence.
+- **Accidents (K2)**: Involvement in traffic accidents, type and severity.
+- **Traffic Violations (K3)**: Type and timing of driving offenses.
 
-## Datasets
+All data is anonymized with consistent ID matching between the sources.
 
-Three data sources were used:
+---
 
-- `K1`: Young drivers’ demographic and licensing data.
-- `K2`: Accident records, including type and severity.
-- `K3`: Traffic violation history for the driver and their parents.
+## Key Steps
 
-These datasets were merged using a consistent anonymized driver ID.
+### 1. Data Cleaning and Integration
+- Merged all data sources using unique driver IDs.
+- Filtered invalid records and handled missing values through logical imputation.
+- Dropped features with more than 75% missing values.
+- Removed data leakage features (e.g., accident severity or vetek post-accident).
 
-## Key Techniques
+### 2. Feature Engineering
+- Constructed features like:
+  - Driving experience (`overall_experience`)
+  - Total number of violations
+  - Parental violation/accident history
+  - Categorical binning (e.g., continent of birth, district)
+- Grouped rare categories and applied appropriate imputation strategies.
 
-- Data cleaning and imputation.
-- Feature engineering and aggregation of accident/violation histories.
-- Handling categorical variables via one-hot encoding.
-- Train/Validation/Test splitting (70/15/15).
-- Oversampling using SMOTE to address imbalanced classes.
-- Clustering and group analysis using unsupervised learning.
-- Model training and evaluation using scikit-learn tools.
+### 3. Clustering Young Drivers
+- Built 4 clusters of driver profiles based on behavioral and demographic features.
+- Characterized each cluster based on experience, risk indicators, and restrictions.
+- Used the clusters as part of the downstream predictive analysis.
 
-## Technologies
+### 4. Classification Model
+- Target variable: `has_accident` (binary).
+- Addressed strong class imbalance using **SMOTE**.
+- Applied a **Random Forest Classifier**.
+- Evaluated performance on separate validation and test sets using:
+  - Accuracy
+  - Precision, Recall, F1-score
+  - Confusion matrix
 
-- Python
-- pandas, NumPy
-- scikit-learn
-- imbalanced-learn
-- matplotlib, seaborn
+---
 
-## Results Summary
+## Results
 
-The final model achieved high performance on the test set, demonstrating strong predictive power, especially after addressing class imbalance and refining feature selection. Clustering added valuable interpretability by highlighting distinct behavioral patterns among different driver types.
+- The model achieved strong performance across all metrics, even with imbalanced classes.
+- Clustering revealed clear risk segments among drivers.
+- Feature engineering (e.g., encoding, binning) significantly improved interpretability and performance.
 
-## Note
-
-All personal identifiers are anonymized. This project demonstrates best practices in building end-to-end ML pipelines with tabular data.
 
