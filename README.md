@@ -1,6 +1,4 @@
 # Young_Driver_Risk_Profiling_and_Accident_Prediction
-כמובן, הנה גרסה של תיאור לפרויקט להעלאה ל-GitHub – ללא סממנים של עבודת בית ובלי אייקונים:
-
 ---
 
 ## Young Driver Risk Profiling and Accident Prediction
