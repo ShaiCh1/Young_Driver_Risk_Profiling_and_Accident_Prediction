@@ -1,36 +1,45 @@
-# Young_Driver_Risk_Profiling_and_Accident_Prediction
----
+# Young Driver Risk Profiling and Accident Prediction
 
-## Young Driver Risk Profiling and Accident Prediction
+This project presents a full machine learning workflow for analyzing young drivers’ risk profiles and predicting their likelihood of being involved in a traffic accident. The data combines demographic information, driving history, accident records, and traffic violations to generate actionable insights and train predictive models.
 
-This project demonstrates a full machine learning workflow aimed at analyzing risk factors for young drivers and predicting accident involvement. The solution integrates multiple data sources related to demographics, driving behavior, and traffic violations.
+## Project Structure
 
-### Project Overview
+The project is divided into two main parts:
 
-The analysis includes:
-- Data integration from three separate datasets:
-  - **Drivers dataset** – contains demographic information, license history, and restrictions.
-  - **Accidents dataset** – includes records of accidents and circumstances.
-  - **Violations dataset** – contains traffic violations by the driver or their parents.
+### 1. Driver Profiling with Clustering
 
-### Objectives
+- Goal: Identify distinct groups of young drivers based on their background and behavior.
+- Methods: Clustering techniques (e.g., KMeans) were applied after extensive feature engineering to group drivers into meaningful profiles.
+- Analysis: Each group was characterized by features such as driving experience, license restrictions, parental accident history, and demographic attributes.
 
-1. **Driver Profiling**  
-   Use clustering techniques to group young drivers into distinct behavior/risk profiles based on a variety of features including experience, restrictions, and parental history.
+### 2. Accident Risk Prediction
 
-2. **Accident Risk Prediction**  
-   Train a supervised model to predict whether a young driver is likely to be involved in an accident.
+- Goal: Train a model to predict whether a young driver is likely to be involved in an accident.
+- Model: Random Forest Classifier.
+- Class Imbalance: Handled using SMOTE oversampling.
+- Evaluation: Model performance evaluated on validation and test sets using accuracy, precision, recall, F1-score, and confusion matrix.
 
-### Key Steps
+## Datasets
 
-- Data cleaning and preparation
-- Feature engineering, including handling of missing values and encoding of categorical variables
-- Clustering to identify driver profiles
-- Data balancing using SMOTE
-- Model training using Random Forest
-- Evaluation using classification metrics and confusion matrix
+Three data sources were used:
 
-### Technologies Used
+- `K1`: Young drivers’ demographic and licensing data.
+- `K2`: Accident records, including type and severity.
+- `K3`: Traffic violation history for the driver and their parents.
+
+These datasets were merged using a consistent anonymized driver ID.
+
+## Key Techniques
+
+- Data cleaning and imputation.
+- Feature engineering and aggregation of accident/violation histories.
+- Handling categorical variables via one-hot encoding.
+- Train/Validation/Test splitting (70/15/15).
+- Oversampling using SMOTE to address imbalanced classes.
+- Clustering and group analysis using unsupervised learning.
+- Model training and evaluation using scikit-learn tools.
+
+## Technologies
 
 - Python
 - pandas, NumPy
@@ -38,4 +47,11 @@ The analysis includes:
 - imbalanced-learn
 - matplotlib, seaborn
 
----
+## Results Summary
+
+The final model achieved high performance on the test set, demonstrating strong predictive power, especially after addressing class imbalance and refining feature selection. Clustering added valuable interpretability by highlighting distinct behavioral patterns among different driver types.
+
+## Note
+
+All personal identifiers are anonymized. This project demonstrates best practices in building end-to-end ML pipelines with tabular data.
+
